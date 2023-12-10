@@ -8,9 +8,10 @@ app = Flask(__name__)
 def main():
     return '''
      <form action="/echo_user_input" method="POST">
-         <input name="user_input">
-         <input type="submit" value="Submit!">
-     </form>
+        <label for="user_input">Enter your word below and hit submit:</label><br>
+        <input type="text" id="user_input" name="user_input"><br>
+        <input type="submit" value="Submit!">
+    </form>
      '''
 
 @app.route("/echo_user_input", methods=["POST"])
