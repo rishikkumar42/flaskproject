@@ -24,7 +24,7 @@ jobs:
         pip install pytest
 
     - name: Run unit tests
-      run: pytest -m "not integration"
+      run: python3 -m unittest tests.unit_tests"
 
     - name: Run integration tests
-      run: pytest -m "integration"
+      run: python3 -m unittest tests.integration_tests""
