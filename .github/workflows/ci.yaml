@@ -27,4 +27,4 @@ jobs:
       run: python3 -m unittest tests.unit_tests"
 
     - name: Run integration tests
-      run: python3 -m unittest tests.integration_tests""
+      run: python3 -m unittest tests.integration_tests"
