@@ -7,6 +7,13 @@ from backend.fetch_data import fetch_data
 class TestApp(unittest.TestCase):
     def setUp(self):
         self.app = app.test_client()
+        self.reset_db()
+    
+    #resets the db to be used without mock data 
+    def reset_db(self):
+        with app.app_context():
+            db.drop_all()
+            db.create_all()
 
     #this test checks if the main home page works and loads successfully 
     def test_main_route(self):
@@ -44,8 +51,7 @@ class TestApp(unittest.TestCase):
             fetch_data(params)
 
             movies = Movie.query.all()
-            self.assertEqual(len(movies), 22) #assertion is for 22 because the db has 20 to start and the 2 mock ones get added
-
+            self.assertEqual(len(movies), 2) 
 
 if __name__ == '__main__':
     unittest.main()
