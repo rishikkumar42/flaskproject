@@ -1,0 +1,45 @@
+
+<!-- user_input_form.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Search Form</title>
+</head>
+<body>
+    <div style='border-bottom: 2px solid black; padding-bottom: 5px; margin-bottom: 10px;'>
+        <h1>Movie Buff Recs</h1>
+    </div>
+
+    <div>
+        <button style='font-weight:bold; font-size:25px; margin-right: 30px;' onclick="window.location.href='/rand_gen_form'">Random Movie Generator</button>
+        <button style='font-weight:bold; font-size:18px; margin-right: 30px;' onclick="window.location.href='/'">Home Page</button>
+        <button style='font-weight:bold; font-size:18px; margin-right: 30px;' onclick="window.location.href='/action'">View Top Action Movies</button>
+        <button style='font-weight:bold; font-size:18px; margin-right: 30px;' onclick="window.location.href='/movies'">Your Saved Movies</button>
+        <button style='font-weight:bold; font-size:18px; margin-right: 30px;' onclick="window.location.href='/search'">Search for a Movie</button>
+    </div>
+
+    <h1>Select Your Preferences</h1>
+    <form action="/random_gen_display" method="POST">
+        <label><input type="checkbox" name="preference" value="28"> Action</label><br>
+        <label><input type="checkbox" name="preference" value="12"> Adventure</label><br>
+        <label><input type="checkbox" name="preference" value="16"> Animation</label><br>
+        <label><input type="checkbox" name="preference" value="35"> Comedy</label><br>
+        <label><input type="checkbox" name="preference" value="80"> Crime</label><br>
+        <label><input type="checkbox" name="preference" value="99"> Documentary</label><br>
+        <label><input type="checkbox" name="preference" value="18"> Drama</label><br>
+        <label><input type="checkbox" name="preference" value="14"> Fantasy</label><br>
+        <label><input type="checkbox" name="preference" value="36"> History</label><br>
+        <label><input type="checkbox" name="preference" value="27"> Horror</label><br>
+        <label><input type="checkbox" name="preference" value="53"> Thriller</label><br>
+        <label><input type="checkbox" name="preference" value="37"> Western</label><br>
+       
+        <label>Enter a preferred release year:</label><br>
+        <input type="number" name="year"><br>
+
+        <label>Enter a minimum rating:</label><br>
+        <input type="number" name="rating"><br>
+
+        <input type="submit" value="Submit Preferences">
+    </form>
+</body>
+</html>

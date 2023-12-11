@@ -1,28 +1,18 @@
 import requests
-from models import db, Movie  
+from backend.models import db, Movie  
+#this code is similar to fetch_data but it uses the api tto fetch data using the users entered query 
 
-def fetch_data():
-    # Replace 'YOUR_TMDB_API_KEY' with your TMDB API key
+def fetch_search_data(query):
     api_key = 'eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJhNjk0OWI3OTZkYmY4OGZjMDlmZGM0NjA5YmI2MGI5MCIsInN1YiI6IjY1NzU0YjFhODlkOTdmMDExZGNjYWJkMCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.7HEyAJ3TNcXvUAjt0vRHlYYHhivhPG1NIYNNTvtUlfk'
-    base_url = 'https://api.themoviedb.org/3/discover/movie?'
+    base_url = 'https://api.themoviedb.org/3/search/movie?'
 
-    # Parameters for fetching movies (modify as needed)
-    params = {
-        'api_key': api_key,
-        'sort_by': 'popularity.desc', 
-        'include_adult': 'false',
-        'include_video': 'false',
-        'release_year': '2020',  
-        'language': 'en-US'  
-    }
-    url = "https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page=1&primary_release_year=2020&sort_by=popularity.desc"
+    url = f"{base_url}{'&'.join([f'{key}={value}' for key, value in query.items()])}"
+
     headers = {
         "accept": "application/json",
         "Authorization": f"Bearer {api_key}"
     }
-    print('hello')
     response = requests.get(url, headers=headers)
-    print(response.json())
     if response.status_code == 200:
         movies_data = response.json().get('results', [])
 
@@ -31,7 +21,9 @@ def fetch_data():
                 id=movie.get('id'),
                 title=movie.get('title'),
                 release_date=movie.get('release_date'),
-                vote_average=movie.get('vote_average')
+                vote_average=movie.get('vote_average'),
+                overview = movie.get('overview'),
+                poster_path = movie.get('poster_path'),
             )
             db.session.add(new_movie)
         db.session.commit()
