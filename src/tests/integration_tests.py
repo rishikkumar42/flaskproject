@@ -1,16 +1,20 @@
 import unittest
-from app import app, db, Movie  
+from unittest.mock import patch, MagicMock
+from app import app, db, Movie
+from backend.fetch_data import fetch_data
 
 class TestIntegration(unittest.TestCase):
     def setUp(self):
         app.config['TESTING'] = True  
         app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///test.db'  
         self.app = app.test_client()
-        db.create_all()  
+        with app.app_context():
+            db.create_all()  
 
     def tearDown(self):
-        db.session.remove()  
-        db.drop_all()  
+        with app.app_context():
+            db.session.remove()  
+            db.drop_all()  
 
     #testing for main home page successfully working
     def test_main_route_integration(self):
